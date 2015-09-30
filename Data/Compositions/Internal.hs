@@ -63,7 +63,14 @@ wellformed = go 1 . unwrap
 -- prop> toList (mempty :: Compositions Element) == []
 -- prop> \(Compositions a) (Compositions b) -> toList (a <> b) == toList a ++ toList b
 --
-newtype Compositions a = Tree { unwrap :: [Node a] } deriving (Show, Eq)
+newtype Compositions a = Tree { unwrap :: [Node a] } deriving (Eq)
+
+instance Show a => Show (Compositions a) where
+  show ls = "fromList " ++ show (toList ls)
+
+instance (Monoid a, Read a) => Read (Compositions a) where
+  readsPrec _  ('f':'r':'o':'m':'L':'i':'s':'t':' ':r) = map (\(a,s) -> (fromList a, s)) $ reads r
+  readsPrec _  _ = []
 
 data Node a = Node { nodeSize :: Int
                    , nodeChildren :: Maybe (Node a , Node a)

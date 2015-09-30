@@ -1,9 +1,13 @@
-{-# LANGUAGE DeriveFunctor, Trustworthy #-}
+{-# LANGUAGE DeriveFunctor, CPP, Trustworthy #-}
 {-# OPTIONS -fno-warn-missing-signatures #-}
 -- | See "Data.Compositions" for normal day-to-day use. This module contains the implementation of that module.
 module Data.Compositions.Internal where
 import Data.Monoid
+#if __GLASGOW_HASKELL__ == 708
 import Data.Foldable
+#else
+import Data.Foldable hiding (length, sum)
+#fi
 import Prelude hiding (sum, drop, take, length, concatMap, splitAt)
 
 {-# RULES

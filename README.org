@@ -1,3 +1,4 @@
+[[https://travis-ci.org/liamoc/composition-tree.svg]]
 * Composition Trees
 
 A /compositions list/ or /composition tree/ is a list data type where 

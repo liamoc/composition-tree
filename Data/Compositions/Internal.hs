@@ -7,7 +7,7 @@ import Data.Monoid
 import Data.Foldable
 #endif
 #if __GLASGOW_HASKELL__ >= 710
-import Data.Foldable hiding (length, sum)
+import Data.Foldable hiding (length)
 #endif
 import Prelude hiding (sum, drop, take, length, concatMap, splitAt)
 

@@ -20,3 +20,31 @@ The actual package only depends on ~base~, and is more or less
 straightforward Haskell code.
 
 It is released under the BSD3 license.
+
+** Building, Installing
+
+~composition-tree~ is released on Hackage and is available in the usual way:
+
+#+BEGIN_EXAMPLE
+  $ cabal update
+  $ cabal install composition-tree
+#+END_EXAMPLE
+
+** Using
+
+The full Haddock documentation is available [[http://hackage.haskell.org/package/composition-tree][on Hackage]]. 
+
+A composition tree can be constructed using ~fromList~, or incrementally built up using ~mempty~ and ~cons~. 
+Use the provided ~take~, ~drop~, ~splitAt~ functions to get the sublist you want, and then use ~composed~ to extract the ~mconcat~ of that sublist.
+
+In the case of ~take~, as its complexity is rather bad, ~takeComposed~ may be preferable if you just want the ~composed~ result. A rewrite ~RULE~ is provided
+to do this automatically, but it may not fire as often as you'd like, so best be safe.
+
+** Future work
+
+- Perhaps it would be worth investigating relaxing the right-associative bias and thus improving the complexity of ~take~ and ~mappend~ while slightly reducing the performance
+  of all the other operations.
+
+** Other notes
+
+This library is designed to be used with my ~patches-vector~ library, which, along with this library gives you a basic version control system for vectors. Pretty neat!

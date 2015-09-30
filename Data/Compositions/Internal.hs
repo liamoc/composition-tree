@@ -7,7 +7,7 @@ import Data.Monoid
 import Data.Foldable
 #else
 import Data.Foldable hiding (length, sum)
-#fi
+#endif
 import Prelude hiding (sum, drop, take, length, concatMap, splitAt)
 
 {-# RULES

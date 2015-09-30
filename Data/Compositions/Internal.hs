@@ -5,7 +5,8 @@ module Data.Compositions.Internal where
 import Data.Monoid
 #if __GLASGOW_HASKELL__ == 708
 import Data.Foldable
-#else
+#endif
+#if __GLASGOW_HASKELL__ >= 710
 import Data.Foldable hiding (length, sum)
 #endif
 import Prelude hiding (sum, drop, take, length, concatMap, splitAt)

@@ -57,6 +57,9 @@ wellformed = go 1 . unwrap
 -- performs O(a log (a + b)) element compositions, so you want
 -- the left-hand list @a@ to be as small as possible.
 --
+-- For a version of the composition list with the opposite bias, and therefore opposite performance characteristics,
+-- see "Data.Compositions.Snoc".
+--
 -- __Monoid laws:__
 --
 -- prop> \(Compositions l) -> mempty <> l == l
@@ -147,6 +150,7 @@ drop i = Tree . go i . unwrap
 --  prop> \(l :: [Element]) n -> take n (fromList l) == fromList (List.take n l)
 --  prop> \(Compositions l) n -> toList (take n l) == List.take n (toList l)
 --
+--  prop> \(Compositions l) (Positive n) -> take n l <> drop n l == l
 take :: Monoid a => Int -> Compositions a -> Compositions a
 take i = go i . unwrap
   where go n _  | n <= 0 = mempty
@@ -160,8 +164,6 @@ take i = go i . unwrap
 --
 -- prop> \(Compositions l) n -> takeComposed n l == composed (take n l)
 -- prop> \(Compositions l) -> takeComposed (length l) l == composed l
---
--- prop> \(Compositions l) (Positive n) -> take n l <> drop n l == l
 takeComposed :: Monoid a => Int -> Compositions a -> a
 takeComposed i = go i . unwrap
   where go n _ | n <= 0 = mempty
@@ -245,5 +247,5 @@ fromList = mconcat . map singleton
 --
 -- prop> \(x :: Element) (xs :: [Element]) -> cons x (fromList xs) == fromList (x : xs)
 -- prop> \(x :: Element) (Compositions xs) -> toList (cons x xs) == x : toList xs
-cons :: Show a => Monoid a => a -> Compositions a -> Compositions a
+cons :: Monoid a => a -> Compositions a -> Compositions a
 cons x = (singleton x <>)

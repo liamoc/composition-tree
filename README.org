@@ -8,9 +8,12 @@ is in a wiki, version control system, or collaborative editor, where
 each change or delta would be stored in a list, and it is sometimes
 necessary to compute the composed delta between any two versions.
 
-This version of a composition list is strictly biased to 
-right-associativity, in that we only support efficient consing
-to the front of the list.
+This package provides two versions of the data structure. 
+One is strictly biased to right-associativity, in that we 
+only support efficient consing to the front of the list, and the
+other is biased to left associativity, in that we only support
+efficient snoccing to the end of the list. The latter is implemented
+in terms of the former, just storing all elements in reverse.
 
 This library is extensively covered by a comprehensive suite of
 QuickCheck properties, which are written into the documentation and
@@ -37,13 +40,13 @@ The full Haddock documentation is available [[http://hackage.haskell.org/package
 A composition tree can be constructed using ~fromList~, or incrementally built up using ~mempty~ and ~cons~. 
 Use the provided ~take~, ~drop~, ~splitAt~ functions to get the sublist you want, and then use ~composed~ to extract the ~mconcat~ of that sublist.
 
-In the case of ~take~, as its complexity is rather bad, ~takeComposed~ may be preferable if you just want the ~composed~ result. A rewrite ~RULE~ is provided
-to do this automatically, but it may not fire as often as you'd like, so best be safe.
+For the regular cons-biased strutuure, ~takeComposed~ may be preferable if you just want the ~composed~ result of ~take~. Similarly ~dropComposed~
+for the snoc-biased version. A rewrite ~RULE~ is provided to do this automatically, but it may not fire as often as you'd like, so best be safe.
 
 ** Future work
 
-- Perhaps it would be worth investigating relaxing the right-associative bias and thus improving the complexity of ~take~ and ~mappend~ while slightly reducing the performance
-  of all the other operations.
+- Perhaps it would be worth investigating relaxing the right/left-associative bias and thus drawing a middle ground allowing acceptable performance
+  of both ~take~ and ~drop~, by slightly reducing the performance of all the other operations.
 
 ** Other notes
 

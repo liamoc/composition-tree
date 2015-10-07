@@ -19,6 +19,7 @@ library
   exposed-modules:     Data.Compositions.Internal
                        Data.Compositions
                        Data.Compositions.Snoc
+                       Data.Compositions.Snoc.Internal
   other-extensions:    ScopedTypeVariables, DeriveFunctor, GeneralizedNewtypeDeriving
   build-depends:       base >=4.7 && <4.9
   default-language:    Haskell2010

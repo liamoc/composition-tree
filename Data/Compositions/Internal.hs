@@ -10,10 +10,8 @@ import Data.Foldable
 import Data.Foldable hiding (length)
 #endif
 import Prelude hiding (sum, drop, take, length, concatMap, splitAt)
-
 {-# RULES
-"take/composed" [~2] forall n xs. composed (take n xs) = takeComposed n xs
-  #-}
+"take/composed" [~2] forall n xs. composed (take n xs) = takeComposed n xs #-}
 -- $setup
 -- >>> :set -XScopedTypeVariables
 -- >>> import Control.Applicative

@@ -33,6 +33,12 @@ It is released under the BSD3 license.
   $ cabal install composition-tree
 #+END_EXAMPLE
 
+You can also use ~stack~ if you prefer:
+
+#+BEGIN_EXAMPLE
+  $ stack install composition-tree
+#+END_EXAMPLE
+
 ** Using
 
 The full Haddock documentation is available [[http://hackage.haskell.org/package/composition-tree][on Hackage]]. 

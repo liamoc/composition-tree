@@ -39,6 +39,8 @@ You can also use ~stack~ if you prefer:
   $ stack install composition-tree
 #+END_EXAMPLE
 
+A variety of ~stack-*.yaml~ files are provided for building against various LTS snapshots.
+
 ** Using
 
 The full Haddock documentation is available [[http://hackage.haskell.org/package/composition-tree][on Hackage]]. 

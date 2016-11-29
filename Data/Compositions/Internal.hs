@@ -121,6 +121,8 @@ unsafeMap f = Tree . fmap (fmap f) . unwrap
 --
 -- prop> \(l :: [Element]) n -> drop n (fromList l) == fromList (List.drop n l)
 -- prop> \(Compositions l) n -> toList (drop n l) == List.drop n (toList l)
+
+{-# NOINLINE[0] drop #-}
 drop :: Monoid a => Int -> Compositions a -> Compositions a
 drop i = Tree . go i . unwrap
   where go n xs | n <= 0 = xs
@@ -149,6 +151,7 @@ drop i = Tree . go i . unwrap
 --  prop> \(Compositions l) n -> toList (take n l) == List.take n (toList l)
 --
 --  prop> \(Compositions l) (Positive n) -> take n l <> drop n l == l
+{-# NOINLINE take #-}
 take :: Monoid a => Int -> Compositions a -> Compositions a
 take i = go i . unwrap
   where go n _  | n <= 0 = mempty

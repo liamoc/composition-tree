@@ -27,9 +27,17 @@ import Data.Foldable hiding (length)
 
 newtype Flip a = Flip { unflip :: a } deriving (Functor, Eq)
 
+#if __GLASGOW_HASKELL__ >= 840
+instance Semigroup a => Semigroup (Flip a) where
+  (Flip a) <> (Flip b) = Flip $ a <> b
+
+instance Monoid a => Monoid (Flip a) where
+  mempty = Flip mempty
+#else
 instance Monoid a => Monoid (Flip a) where
   mempty = Flip mempty
   mappend (Flip a) (Flip b) = Flip (mappend b a)
+#endif
 
 -- | A /compositions list/ or /composition tree/ is a list data type
 -- where the elements are monoids, and the 'mconcat' of any contiguous sublist can be
@@ -57,9 +65,17 @@ instance Monoid a => Monoid (Flip a) where
 --
 newtype Compositions a = C { unC :: C.Compositions (Flip a) } deriving (Eq)
 
+#if __GLASGOW_HASKELL__ >= 840
+instance Semigroup a => Semigroup (Compositions a) where
+  (C a) <> (C b) = C $ b <> a
+
+instance Monoid a => Monoid (Compositions a) where
+  mempyt = C mempty
+#else
 instance Monoid a => Monoid (Compositions a) where
   mempty = C mempty
   mappend (C a) (C b) = C $ b <> a
+#endif
 
 instance Foldable Compositions where
   foldMap f (C x) = foldMap (f . unflip) . reverse $ toList x

@@ -21,12 +21,12 @@ library
                        Data.Compositions.Snoc
                        Data.Compositions.Snoc.Internal
   other-extensions:    ScopedTypeVariables, DeriveFunctor, GeneralizedNewtypeDeriving
-  build-depends:       base >=4.7 && <4.10
+  build-depends:       base >=4.7 && <4.12
   default-language:    Haskell2010
 
 
 test-suite             test-comp-tree
   type: exitcode-stdio-1.0
   main-is: tests.hs
-  build-depends: base >= 4.7 && < 4.10, QuickCheck >= 2.7 && < 2.9, composition-tree, doctest >= 0.9 && < 0.12
+  build-depends: base >= 4.7 && < 4.12, QuickCheck >= 2.7 && < 2.12, composition-tree, doctest >= 0.9 && < 0.16
   default-language:    Haskell2010
